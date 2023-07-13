@@ -56,6 +56,8 @@ LIBOCAML_SRC = $(LIBOCAML_ORIGIN)/$(LIBOCAML_SUBDIR)
 ################################################################################
 CINCLUDES-y += -I$(LIBOCAML_SRC)/runtime/
 
+LIBOCAML_COMMON_INCLUDES-y += -I$(LIBOCAML_BASE)/include
+CINCLUDES-$(CONFIG_LIBOCAML) += $(LIBOCAML_COMMON_INCLUDES-y)
 
 $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin
 	cd $(LIBOCAML_SRC) && \
