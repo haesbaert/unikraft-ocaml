@@ -61,6 +61,7 @@ CINCLUDES-$(CONFIG_LIBOCAML) += $(LIBOCAML_COMMON_INCLUDES-y)
 
 $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin
 	cd $(LIBOCAML_SRC) && \
+        sed -i -e 's/^otherlibraries="dynlink runtime_events"$$/otherlibraries=""/g' configure && \
 	CC=$(CC) \
 	CFLAGS="$(COMPFLAGS) $(COMPFLAGS)-y $(CFLAGS) $(CFLAGS-y) $(CINCLUDES) $(CINCLUDES-y)" \
 	CPPFLAGS="" \
@@ -101,7 +102,7 @@ LIBOCAML_CFLAGS-y += $(LIBOCAML_FLAGS_SUPPRESS)
 LIBOCAML_SRCS-y += $(addprefix $(LIBOCAML_SRC)/runtime/,$(addsuffix .c, \
   startup_aux startup_nat main fail_nat roots signals \
   signals_nat misc major_gc minor_gc memory alloc compare ints \
-  floats str array io extern intern hash sys parsing gc_ctrl runtime_events md5 obj \
+  floats str array io extern intern hash sys parsing gc_ctrl md5 obj \
   lexing printexc callback weak finalise custom \
   globroots backtrace_nat backtrace debugger meta \
   platform fiber shared_heap addrmap frame_descriptors \
