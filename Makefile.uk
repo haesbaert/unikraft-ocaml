@@ -61,7 +61,7 @@ CINCLUDES-$(CONFIG_LIBOCAML) += $(LIBOCAML_COMMON_INCLUDES-y)
 
 $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin
 	cd $(LIBOCAML_SRC) && \
-        sed -i -e 's/^otherlibraries="dynlink runtime_events"$$/otherlibraries=""/g' configure && \
+        sed -i -e 's/^otherlibraries="dynlink runtime_events"$$/otherlibraries="runtime_events"/g' configure && \
 	CC=$(CC) \
 	CFLAGS="$(COMPFLAGS) $(COMPFLAGS)-y $(CFLAGS) $(CFLAGS-y) $(CINCLUDES) $(CINCLUDES-y)" \
 	CPPFLAGS="" \
@@ -70,7 +70,6 @@ $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin
 
 $(LIBOCAML_BUILD)/.prepared: $(LIBOCAML_SRC)/.configured
 	echo "#undef POSIX_SIGNALS" >> $(LIBOCAML_SRC)/runtime/caml/s.h
-	echo "#define Max_domains 1" >> $(LIBOCAML_SRC)/runtime/caml/config.h
 	echo "#define Minor_heap_max (1 << 22)" >> $(LIBOCAML_SRC)/runtime/caml/config.h
 	touch $@
 
@@ -106,7 +105,7 @@ LIBOCAML_SRCS-y += $(addprefix $(LIBOCAML_SRC)/runtime/,$(addsuffix .c, \
   lexing printexc callback weak finalise custom \
   globroots backtrace_nat backtrace debugger meta \
   platform fiber shared_heap addrmap frame_descriptors \
-  clambda_checks afl bigarray unix \
-  memprof domain sync skiplist lf_skiplist codefrag prng))
+  clambda_checks afl bigarray unix gc_stats runtime_events \
+  memprof domain sync skiplist lf_skiplist codefrag prng dynlink_nat))
 
 LIBOCAML_SRCS-y += $(LIBOCAML_SRC)/runtime/amd64.S
