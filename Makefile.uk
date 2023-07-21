@@ -39,7 +39,7 @@ $(eval $(call addlib_s,libocaml,$(CONFIG_LIBOCAML)))
 ################################################################################
 # Sources
 ################################################################################]
-LIBOCAML_VERSION = trunk
+LIBOCAML_VERSION = 5.0.0
 LIBOCAML_URL = https://github.com/ocaml/ocaml/archive/$(LIBOCAML_VERSION).zip
 LIBOCAML_SUBDIR = ocaml-$(LIBOCAML_VERSION)
 LIBOCAML_PATCHDIR = $(LIBOCAML_BASE)/patches
@@ -66,7 +66,7 @@ $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin
 	CFLAGS="$(COMPFLAGS) $(COMPFLAGS)-y $(CFLAGS) $(CFLAGS-y) $(CINCLUDES) $(CINCLUDES-y)" \
 	CPPFLAGS="" \
 	LIBS="-Wl,--unresolved-symbols=ignore-all" \
-	./configure --host x86_64-none --without-zstd && touch $@
+	./configure --host x86_64-none && touch $@
 
 $(LIBOCAML_BUILD)/.prepared: $(LIBOCAML_SRC)/.configured
 	echo "#undef POSIX_SIGNALS" >> $(LIBOCAML_SRC)/runtime/caml/s.h
