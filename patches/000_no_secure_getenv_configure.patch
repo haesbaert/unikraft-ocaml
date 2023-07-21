@@ -1,0 +1,34 @@
+diff --git configure configure
+index a7f7bba3d0..906675e0e0 100755
+--- a/configure
++++ b/configure
+@@ -16177,29 +16177,6 @@ then :
+ fi
+ 
+ 
+-## secure_getenv and __secure_getenv
+-
+-saved_CPPFLAGS="$CPPFLAGS"
+-CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
+-
+-ac_fn_c_check_func "$LINENO" "secure_getenv" "ac_cv_func_secure_getenv"
+-if test "x$ac_cv_func_secure_getenv" = xyes
+-then :
+-  printf "%s\n" "#define HAS_SECURE_GETENV 1" >>confdefs.h
+-
+-else $as_nop
+-  ac_fn_c_check_func "$LINENO" "__secure_getenv" "ac_cv_func___secure_getenv"
+-if test "x$ac_cv_func___secure_getenv" = xyes
+-then :
+-  printf "%s\n" "#define HAS___SECURE_GETENV 1" >>confdefs.h
+-
+-fi
+-
+-fi
+-
+-
+-CPPFLAGS="$saved_CPPFLAGS"
+-
+ ## issetugid
+ 
+ ac_fn_c_check_func "$LINENO" "issetugid" "ac_cv_func_issetugid"

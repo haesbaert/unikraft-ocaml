@@ -66,7 +66,6 @@ $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin $(LIBOCAML_BUILD)/.patche
 	CFLAGS="$(COMPFLAGS) $(COMPFLAGS)-y $(CFLAGS) $(CFLAGS-y) $(CINCLUDES) $(CINCLUDES-y)" \
 	CPPFLAGS="" \
 	LIBS="-Wl,--unresolved-symbols=ignore-all" \
-	rm configure && make configure && \
 	./configure --host x86_64-none --without-zstd && touch $@
 
 $(LIBOCAML_BUILD)/.prepared: $(LIBOCAML_SRC)/.configured
