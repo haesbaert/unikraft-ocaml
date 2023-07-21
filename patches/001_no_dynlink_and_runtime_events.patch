@@ -1,0 +1,13 @@
+diff --git a/configure b/configure
+index 906675e0e0..02a1437262 100755
+--- a/configure
++++ b/configure
+@@ -13557,7 +13557,7 @@ case $host in #(
+     exeext='' ;;
+ esac
+ 
+-otherlibraries="dynlink runtime_events"
++otherlibraries=""
+ lib_dynlink=true
+ lib_runtime_events=true
+ if test x"$enable_unix_lib" != "xno"
