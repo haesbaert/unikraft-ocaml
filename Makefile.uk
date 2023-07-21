@@ -68,7 +68,6 @@ $(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin $(LIBOCAML_BUILD)/.patche
 	./configure --host x86_64-none --without-zstd && touch $@
 
 $(LIBOCAML_BUILD)/.prepared: $(LIBOCAML_SRC)/.configured
-	echo "#define Minor_heap_max (1 << 22)" >> $(LIBOCAML_SRC)/runtime/caml/config.h
 	touch $@
 
 UK_PREPARE += $(LIBOCAML_BUILD)/.prepared
