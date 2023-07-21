@@ -43,8 +43,8 @@ LIBOCAML_VERSION = 5.1.0-beta1
 LIBOCAML_URL = https://github.com/ocaml/ocaml/archive/refs/tags/$(LIBOCAML_VERSION).zip
 LIBOCAML_SUBDIR = ocaml-$(LIBOCAML_VERSION)
 LIBOCAML_PATCHDIR = $(LIBOCAML_BASE)/patches
-$(eval $(call patch,libocaml,$(LIBOCAML_PATCHDIR),$(LIBOCAML_SUBDIR)))
 $(eval $(call fetch,libocaml,$(LIBOCAML_URL)))
+$(eval $(call patch,libocaml,$(LIBOCAML_PATCHDIR),$(LIBOCAML_SUBDIR)))
 
 ################################################################################
 # Helpers
@@ -59,13 +59,14 @@ CINCLUDES-y += -I$(LIBOCAML_SRC)/runtime/
 LIBOCAML_COMMON_INCLUDES-y += -I$(LIBOCAML_BASE)/include
 CINCLUDES-$(CONFIG_LIBOCAML) += $(LIBOCAML_COMMON_INCLUDES-y)
 
-$(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin
+$(LIBOCAML_SRC)/.configured: $(LIBOCAML_BUILD)/.origin $(LIBOCAML_BUILD)/.patched
 	cd $(LIBOCAML_SRC) && \
         sed -i -e 's/^otherlibraries="dynlink runtime_events"$$/otherlibraries="runtime_events"/g' configure && \
 	CC=$(CC) \
 	CFLAGS="$(COMPFLAGS) $(COMPFLAGS)-y $(CFLAGS) $(CFLAGS-y) $(CINCLUDES) $(CINCLUDES-y)" \
 	CPPFLAGS="" \
 	LIBS="-Wl,--unresolved-symbols=ignore-all" \
+	rm configure && make configure && \
 	./configure --host x86_64-none --without-zstd && touch $@
 
 $(LIBOCAML_BUILD)/.prepared: $(LIBOCAML_SRC)/.configured
