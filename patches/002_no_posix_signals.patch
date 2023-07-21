@@ -1,0 +1,24 @@
+diff --git configure configure
+index 02a1437262..fa460aad93 100755
+--- a/configure
++++ b/configure
+@@ -15832,19 +15832,6 @@ then :
+   has_sigprocmask=true
+ else $as_nop
+   has_sigprocmask=false
+-fi
+-
+-  if $has_sigaction && $has_sigprocmask
+-then :
+-  printf "%s\n" "#define POSIX_SIGNALS 1" >>confdefs.h
+-
+-      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: POSIX signal handling found." >&5
+-printf "%s\n" "$as_me: POSIX signal handling found." >&6;}
+-else $as_nop
+-  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: assuming signals have the System V semantics." >&5
+-printf "%s\n" "$as_me: assuming signals have the System V semantics." >&6;}
+-
+-
+ fi
+ 
+ 
